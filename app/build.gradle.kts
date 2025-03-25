@@ -39,9 +39,8 @@ android {
         compose = true
     }
 }
-
 dependencies {
-
+    // Existing dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,32 +61,54 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    val room_version = "2.6.1"
 
-    implementation("androidx.room:room-runtime:$room_version")
+    // Room dependencies (already present)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.compiler)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava2)
+    implementation(libs.androidx.room.rxjava3)
+    implementation(libs.androidx.room.guava)
+    testImplementation(libs.androidx.room.testing)
+    implementation(libs.androidx.room.paging)
 
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    kotlin("androidx.room:room-compiler:$room_version")
+    // Missing Dependencies:
 
-    // If this project only uses Java source, use the Java annotationProcessor
-    // No additional plugins are necessary
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    // Firebase Firestore & Storage
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
 
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
+    // ExoPlayer for video playback
+    implementation(libs.exoplayer)
 
-    // optional - RxJava2 support for Room
-    implementation("androidx.room:room-rxjava2:$room_version")
+    // Coil for image loading in Compose
+    implementation(libs.coil.compose)
 
-    // optional - RxJava3 support for Room
-    implementation("androidx.room:room-rxjava3:$room_version")
+    // MPAndroidChart for progress visualization
+    implementation(libs.mpandroidchart)
 
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation("androidx.room:room-guava:$room_version")
+    // WorkManager for background tasks
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.accompanist.placeholder.material)
 
-    // optional - Test helpers
-    testImplementation("androidx.room:room-testing:$room_version")
 
-    // optional - Paging 3 Integration
-    implementation("androidx.room:room-paging:$room_version")
+
+    // Navigation Compose for in-app navigation (if needed)
+    implementation(libs.androidx.navigation.compose)
+
+    // Kotlin Coroutines for asynchronous operations
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 }
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "com.intellij" && requested.name == "annotations") {
+            useTarget("org.jetbrains:annotations:23.0.0")
+        }
+    }
+}
+
+
