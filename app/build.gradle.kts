@@ -3,8 +3,13 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.gms.google.services)
+    kotlin("plugin.serialization") version "1.9.23"
 }
-
+val ktor_version = "3.1.2"
+val exposed_version = "0.43.0"
+val logback_version = "1.4.11"
+val dotenv_version = "3.0.0"
+val postgresql_version = "42.7.2"
 android {
     namespace = "com.example.fitnessapp"
     compileSdk = 35
@@ -91,15 +96,20 @@ dependencies {
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$room_version")
 
-    implementation("io.ktor:ktor-server-core:2.3.5")
-    implementation("io.ktor:ktor-server-netty:2.3.5")
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.5")
-    implementation("io.ktor:ktor-serialization-gson:2.3.5")
+    implementation("io.ktor:ktor-server-core:3.1.2")
+    implementation("io.ktor:ktor-server-netty:3.1.2")
+    implementation("io.ktor:ktor-server-content-negotiation:3.1.2")
+    implementation("io.ktor:ktor-serialization-gson:3.1.2")
     implementation("ch.qos.logback:logback-classic:1.2.11")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.1.2")
 
     implementation("org.jetbrains.exposed:exposed-core:0.43.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.43.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.43.0")
     implementation("org.postgresql:postgresql:42.5.0")
+    implementation ("io.github.cdimascio:dotenv-java:3.0.0")
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.2"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:3.1.2")
+
 }
