@@ -26,4 +26,44 @@ fun Route.userRoutes(controller: UserController) {
             else call.respond(mapOf("error" to "User not found"))
         }
     }
+
+    post("/api/v1/auth/sync") {
+        val token = call.request.headers["Authorization"]?.removePrefix("Bearer ")
+        if (token == null) {
+            call.respond(HttpStatusCode.Unauthorized, "Missing token")
+            return@post
+        }
+
+        try {
+            val firebaseToken = FirebaseAuth.getInstance().verifyIdToken(token)
+            val uid = firebaseToken.uid
+            val email = firebaseToken.email
+            val name = firebaseToken.name
+
+            // Check if user exists in your PostgreSQL DB
+            val user = transaction {
+                UserEntity.find { Users.email eq email!! }.firstOrNull()
+            }
+
+            val finalUser = if (user == null) {
+                // Create user
+                transaction {
+                    UserEntity.new {
+                        this.email = email!!
+                        this.password = "firebase" // or leave blank
+                        this.firstName = name?.split(" ")?.firstOrNull() ?: ""
+                        this.lastName = name?.split(" ")?.drop(1)?.joinToString(" ") ?: ""
+                    }
+                }
+            } else {
+                user
+            }
+
+            call.respond(HttpStatusCode.OK, mapOf("userId" to finalUser.id.value, "email" to finalUser.email))
+
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.Unauthorized, "Invalid token: ${e.message}")
+        }
+    }
+
 }

@@ -12,7 +12,12 @@
           "package_name": "com.example.fitnessapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "686631844018-ile2rifd49avt5jg36cct5o79u6tr24q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDjWESxYnbmzPKueU4UuXbu_QPXMGt3g30"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686631844018-ile2rifd49avt5jg36cct5o79u6tr24q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

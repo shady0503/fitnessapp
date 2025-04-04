@@ -31,3 +31,11 @@ object KtorServer {
         }.start(wait = true)
     }
 }
+
+fun initFirebase() {
+    val serviceAccount = FileInputStream("/app/google-services.json")
+    val options = FirebaseOptions.builder()
+        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .build()
+    FirebaseApp.initializeApp(options)
+}

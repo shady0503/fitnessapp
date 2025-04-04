@@ -1,11 +1,24 @@
-package com.example.fitnessapp.ui.theme
+package com.example.fitnessapp.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Primary color palette with improved contrast
+val FancyPurple = Color(0xFFB23AFC) // Primary color
+val FancyPink = Color(0xFFFC6EA3)    // Secondary shade for gradients
+val FancyBlue = Color(0xFF2196F3)    // Secondary color
+val FancyOrange = Color(0xFFFFA726)  // Accent color for statistics
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Surface and background colors
+val FancySurface = Color(0xFFFFFFFF)
+val FancyBackground = Color(0xFFF8F8F8)
+val FancyCard = Color(0xFFFFFFFF)
+
+// Text colors with improved contrast
+val FancyOnSurface = Color(0xFF212121)
+val FancyOnBackground = Color(0xFF212121)
+val FancyOnPrimary = Color(0xFFFFFFFF)
+val FancyOnSecondary = Color(0xFFFFFFFF)
+
+// Supporting colors
+val FancyErrorRed = Color(0xFFB00020)
+val FancySuccessGreen = Color(0xFF4CAF50)
