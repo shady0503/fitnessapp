@@ -5,7 +5,7 @@ import com.example.Utils.initFirebase
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
-    //initFirebase()
+    initFirebase()
     initSupabase()
     io.ktor.server.netty.EngineMain.main(args)
 }

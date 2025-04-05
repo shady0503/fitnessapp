@@ -7,21 +7,21 @@ import com.google.firebase.FirebaseOptions
 import com.google.auth.oauth2.GoogleCredentials
 import java.io.FileInputStream
 
-// Firebase initialization
+
 fun initFirebase() {
-    val serviceAccount = FileInputStream("src/main/resources/google-services.json") // Update this path
+    //update it 3la 7ssabek akhay saad
+    val serviceAccount = FileInputStream("C:\\Users\\Youssef\\fitnessapp\\app\\src\\main\\java\\com\\example\\fitnessapp\\DevMobileBackend\\ktor-sample\\src\\main\\resources\\fitnessapp-12bd7-firebase-adminsdk-fbsvc-1b97af51d0.json")
     val options = FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
         .build()
     FirebaseApp.initializeApp(options)
 }
 
-// Firebase ID token verification
 fun verifyToken(token: String): FirebaseToken? {
     return try {
         val firebaseToken = FirebaseAuth.getInstance().verifyIdToken(token)
-        firebaseToken  // Return the Firebase token if verification is successful
+        firebaseToken
     } catch (e: Exception) {
-        null // Return null if token verification fails
+        null
     }
 }

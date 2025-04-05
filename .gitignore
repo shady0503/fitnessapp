@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/src/main/java/com/example/fitnessapp/DevMobileBackend/ktor-sample/build
+com/example/fitnessapp/DevMobileBackend/ktor-sample/src/main/resources/fitnessapp-12bd7-firebase-adminsdk-fbsvc-1b97af51d0.json
+app/src/main/java/com/example/fitnessapp/DevMobileBackend/ktor-sample/src/main/resources/fitnessapp-12bd7-firebase-adminsdk-fbsvc-1b97af51d0.json'
