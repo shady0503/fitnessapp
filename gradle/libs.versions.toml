@@ -3,6 +3,7 @@ accompanistPlaceholderMaterial = "0.30.1"
 agp = "8.8.1"
 coilCompose = "2.2.2"
 exoplayer = "2.19.1"
+firebaseAdmin = "9.2.0"
 firebaseBom = "33.10.0"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
@@ -44,6 +45,7 @@ androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+firebase-admin = { module = "com.google.firebase:firebase-admin", version.ref = "firebaseAdmin" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
 firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx" }

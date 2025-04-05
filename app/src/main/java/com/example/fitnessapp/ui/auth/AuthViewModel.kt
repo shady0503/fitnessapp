@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fitnessapp.ui.Network.ApiClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -44,8 +45,14 @@ class AuthViewModel : ViewModel() {
                     state.password
                 ).await()
                 // On successful login, update state and trigger navigation callback.
-                state = state.copy(isAuthenticated = true)
-                onAuthSuccess()
+                // and sending the token to the backend
+                val idToken = firebaseAuth.currentUser?.getIdToken(true)?.await()?.token
+                if (idToken != null) {
+                    // Send the ID token to the backend for syncing
+                    syncUserToBackend(idToken)
+                    state = state.copy(isAuthenticated = true)
+                    onAuthSuccess()
+                }
             } catch (e: Exception) {
                 state = state.copy(error = e.message ?: "Unknown error occurred")
             }
@@ -62,12 +69,32 @@ class AuthViewModel : ViewModel() {
                     state.password
                 ).await()
                 // On successful registration, update state and trigger navigation callback.
-                state = state.copy(isAuthenticated = true)
-                onAuthSuccess()
+                // Get the ID token after registration
+                val idToken = firebaseAuth.currentUser?.getIdToken(true)?.await()?.token
+                if (idToken != null) {
+                    // Send the ID token to the backend for syncing
+                    syncUserToBackend(idToken)
+                    state = state.copy(isAuthenticated = true)
+                    onAuthSuccess()
+                }
             } catch (e: Exception) {
                 state = state.copy(error = e.message ?: "Unknown error occurred")
             }
             state = state.copy(isLoading = false)
+        }
+    }
+
+    private suspend fun syncUserToBackend(idToken: String) {
+        // Retrofit/HTTP call to your backend API
+        try {
+            val response = ApiClient.authService.syncUser(idToken)
+            if (response.isSuccessful) {
+                // Handle success (syncing complete)
+            } else {
+                // Handle failure (e.g., user not created in the backend)
+            }
+        } catch (e: Exception) {
+            // Handle network errors
         }
     }
 

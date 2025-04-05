@@ -117,6 +117,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.mpandroidchart)
 
+    implementation ("com.google.firebase:firebase-admin:9.4.3")
+
+
     // optional - RxJava3 support for Room
     implementation("androidx.room:room-rxjava3:$room_version")
 
@@ -139,12 +142,18 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:0.43.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.43.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.43.0")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
     implementation("org.postgresql:postgresql:42.5.0")
     implementation("io.github.cdimascio:dotenv-java:3.0.0")
     implementation(platform("io.github.jan-tennert.supabase:bom:3.1.2"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.ktor:ktor-client-android:3.1.2")
-    implementation("com.google.firebase:firebase-admin:9.2.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")  // Gson converter for Retrofit
+    implementation("com.google.auth:google-auth-library-credentials:0.24.0") // Required for GoogleCredentials
+    implementation("com.google.api-client:google-api-client:1.34.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
 }
 
 configurations.all {

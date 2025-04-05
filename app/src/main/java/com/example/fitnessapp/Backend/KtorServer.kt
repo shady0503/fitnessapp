@@ -12,6 +12,11 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.serialization.gson.*
 import com.example.fitnessapp.Backend.Routes.userRoutes
+import com.example.fitnessapp.Backend.Utils.initFirebase
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
+import java.io.FileInputStream
 
 
 object KtorServer {
@@ -20,6 +25,7 @@ object KtorServer {
     private val userController = UserController(userRepository)
 
     fun start() {
+        initFirebase()
         embeddedServer(Netty, port = 8080) {
             install(ContentNegotiation) { gson {} }
             routing {
@@ -32,10 +38,4 @@ object KtorServer {
     }
 }
 
-fun initFirebase() {
-    val serviceAccount = FileInputStream("/app/google-services.json")
-    val options = FirebaseOptions.builder()
-        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-        .build()
-    FirebaseApp.initializeApp(options)
-}
+
